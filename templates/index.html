@@ -1,0 +1,40 @@
+<html>
+  <div style="text-align:center">
+    <font size="16">Used car resale analysis</font>
+  </div>
+<p/>
+  <font size="6">For example, input Brand: "Ford", Model: "Fusion", Zipcode: "07302", and then click "Query" button, to find out interesting statistics of used cars on market. Displayed data are within 50 miles of the query zipcode.</font>
+<p/>
+  <font size="6">For now, zipcode in NY, NJ, and CA are supported. More will be added. Visiting XXX page for a full list of supported brand, model and zipcode.</font>
+<p/>
+  <font size="6">Displayed data are collected by scrapying http://www.carsdirect.com . </font>
+
+  <form action="" method="post">
+	Brand: <input type="text" name="brand"><br/>
+	Model: <input type="text" name="model"><br/>
+	Zipcode: <input type="text" name="zipcode"><br/>
+	<input type="submit" value="Query">
+  </form>
+
+{% if error %}
+<p><font size="8">Error:</font><font size="6"> {{ error }}</font>
+{% endif %}
+
+    <body>
+        <figure>
+        <embed type="image/svg+xml" src="/price_vs_miles_svg/" style="float:left" />
+        </figure>
+        <figure>
+        <embed type="image/svg+xml" src="/price_vs_year_svg/" />
+        </figure>
+    </body>    
+    <body>
+        <figure>
+        <embed type="image/svg+xml" src="/year_histogram_svg/" style="float:left" />
+        </figure>
+        <figure>
+        <embed type="image/svg+xml" src="/exterior_pie_svg/" />
+        </figure>
+    </body>
+
+</html>

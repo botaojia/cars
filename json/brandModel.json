@@ -1,0 +1,130 @@
+[
+    {
+	    "brand" : "Acura",
+	    "model" : ["CL","ILX","ILX-Hybrid","Integra","Legend","MDX","NSX","RDX","RL","TL","ZDX"]
+    },
+    {
+	    "brand" : "Audi",
+	    "model" : ["A3","A3-e-tron","A4","A5","A6","A7","A8","allroad","Q3","Q5","Q7","R8","RS-4","RS-5","RS-7","RS6","S3","S4","S5","S6","S7","S8","SQ5"]
+    },
+    {
+	    "brand" : "BMW",
+	    "model" : ["1-Series-M","1-Series","2-Series","2002","3-Series","4-Series","5-Series","5-Series-Gran-Turismo","6-Series","7-Series","8-Series","CS","i3","i8","Isetta","M","M2","M235","M3","M4","M5","M6","X1","X3","X4","X5","X5-M","X6","X6-M","Z1","Z3","Z4","Z8"]
+    },
+    {
+	    "brand" : "Buick",
+	    "model" : ["Cascada","Century","Enclave","Encore","Envision","LaCrosse","LeSabre","Lucerne","Park-Avenue","Rainier","Reatta","Regal","Rendezvous","Riviera","Roadmaster","Skylark","Terraza","Verano"]
+    },
+    {
+	    "brand" : "Cadillac",
+	    "model" : ["Allante","ATS","ATS-V","Brougham","Catera","Cimarron","Concours","CT6","CTS","CTS-V","DeVille","DTS","Eldorado","ELR","Escalade","Escalade-Hybrid","Fleetwood","Seville","SRX","STS","STS-V","XLR","XLR-V","XT5","XTS"]
+    },
+    {
+	    "brand" : "Chevrolet",
+	    "model" : ["Astro","Avalanche","Aveo","Bel-Air","Blazer","Bolt-EV","Camaro","Caprice","Captiva-Sport","Cavalier","Chevelle","City-Express","Cobalt","Colorado","Corvette","Cruze","Cruze-Limited","El-Camino","Equinox","Express","HHR","Impala","Lumina","Malibu","Monte-Carlo","Nova","Prizm","S-10","Silverado-1500","Silverado-2500HD","Silverado-3500HD","Sonic","Spark","Spark-EV","SS","SSR","Suburban","Tracker","TrailBlazer","Traverse","Trax","Uplander","Venture","Volt"]
+    },
+    {
+	    "brand" : "Chrysler",
+	    "model" : ["200","300","300C","Aspen","Cirrus","Concorde","Crossfire","Fifth-Avenue","Imperial","LeBaron","LHS","New-Yorker-Fifth-Avenue","Pacifica","Prowler","PT-Cruiser","Sebring","Voyager"]
+    },
+    {
+	    "brand" : "Dodge",
+	    "model" : ["Avenger","Caliber","Caravan","Challenger","Charger","Dakota","Dart","Durango","Durango-Hybrid","Grand-Caravan","Intrepid","Journey","Magnum","Neon","Nitro","ProMaster","Ram-1500","Ram-2500","Ram-3500","Sprinter","SRT4","Stratus","Viper"]
+    },
+    {
+	    "brand" : "Ferrari",
+	    "model" : ["308","328","348","360-Modena","400","458-Italia","458-Speciale","512","575M","599-GTB-Fiorano","612-Scaglietti","California","Challenge-Stradale","Dino","Enzo","F12berlinetta","F35","F355","F40","F430","F456","F50","F550-Maranello","FF","Mondial","Superamerica","Testarossa"]
+    },
+    {
+	    "brand" : "Fiat",
+	    "model" : ["124-Spider","500","500c","500e","500L","500X"]
+    },
+    {
+	    "brand" : "Ford",
+	    "model" : ["Aerostar","Bronco","C-Max-Energi","C-Max-Hybrid","Club-Wagon","Contour","Crown-Victoria","E-Series-Van","Edge","Escape","Escape-Hybrid","Escort","Excursion","Expedition","Expedition-EL","Explorer","Explorer-Sport-Trac","Explorer-X","F-150","F-250","F-350","F-450","Fairlane","Fiesta","Five-Hundred","Flex","Focus","Focus-Electric","Focus-ST","Freestar","Freestyle","Fusion","Fusion-Energi","Fusion-Hybrid","GT","Mustang","Ranger","Shelby-GT350","Shelby-GT500","Taurus","Taurus-X","Thunderbird","Transit","Transit-Connect","Windstar"]
+    },
+    {
+	    "brand" : "GMC",
+	    "model" : ["Acadia","Acadia-Limited","Canyon","Envoy","Jimmy","Safari","Savana","Sierra-1500","Sierra-1500-Hybrid","Sierra-2500HD","Sierra-3500HD","Sonoma","Terrain","Yukon","Yukon-Hybrid","Yukon-XL"]
+    },
+    {
+	    "brand" : "Honda",
+	    "model" : ["Acadia","Acadia-Limited","Canyon","Envoy","Jimmy","Safari","Savana","Sierra-1500","Sierra-1500-Hybrid","Sierra-2500HD","Sierra-3500HD","Sonoma","Terrain","Yukon","Yukon-Hybrid","Yukon-XL"]
+    },
+    {
+	    "brand" : "Hyundai",
+	    "model" : ["Accent","Azera","Elantra","Elantra-Coupe","Elantra-GT","Elantra-Touring","Entourage","Equus","Genesis-Coupe","Genesis-Sedan","Ioniq-Electric","Ioniq-Hybrid","Santa-Fe","Santa-Fe-Sport","Sonata","Sonata-Hybrid","Tiburon","Tucson","Veloster","Veracruz","XG-300","XG-350"]
+    },
+    {
+	    "brand" : "Infiniti",
+	    "model" : ["EX35","EX37","FX35","FX37","FX45","FX50","G20","G25","G25x","G35","G35x","G37-Convertible","G37-Coupe","G37-Sedan","G37x-Coupe","G37x-Sedan","I30","I35","IPL-G","J30","JX35","M30","M35","M35h","M35x","M37","M37x","M45","M45x","M56","M56x","Q40","Q45","Q50","Q50-Hybrid","Q60","Q60-IPL","Q70","Q70h","Q70L","QX30","QX4","QX50","QX56","QX60","QX70","QX80"]
+    },
+    {
+	    "brand" : "Jaguar",
+	    "model" : ["F-PACE","F-TYPE","S-TYPE","X-TYPE","XE","XF","XJ","XJ6","XJ8","XJR","XJS","XK","XKR"]
+    },
+    {
+	    "brand" : "Jeep",
+	    "model" : ["Cherokee","Commander","Compass","Grand-Cherokee","Liberty","Patriot","Renegade","Wrangler","Wrangler-Unlimited"]
+    },
+    {
+	    "brand" : "Kia",
+	    "model" : ["Amanti","Borrego","Cadenza","Forte","Forte-Koup","K900","Niro","Optima","Optima-Hybrid","Optima-Plug-In-Hybrid","Rio","Rio5","Rondo","Sedona","Sephia","Sorento","Soul","Soul-EV","Spectra","Spectra5","Sportage"]
+    },
+    {
+	    "brand" : "Land Rover",
+	    "model" : ["Defender","Discovery","Discovery-II","Discovery-Sport","Freelander","LR2","LR3","LR4","Range-Rover","Range-Rover-Evoque","Range-Rover-Sport"]
+    },
+    {
+	    "brand" : "Lexus",
+	    "model" : ["CT","ES","ES-Hybrid","GS","GS-Hybrid","GX","HS","IS","IS-F","LC","LFA","LS","LS-Hybrid","LX","NX","NX-Hybrid","RC","RC-F","RX","RX-Hybrid","SC"]
+    },
+    {
+	    "brand" : "Lincoln",
+	    "model" : ["Aviator","Continental","LS","Mark-LT","MKC","MKS","MKT","MKX","MKZ","MKZ-Hybrid","Navigator","Town-Car","Zephyr"]
+    },
+    {
+	    "brand" : "Mazda",
+	    "model" : ["626","B-Series-Pickup","CX-3","CX-5","CX-7","CX-9","Mazda2","Mazda3","Mazda5","Mazda6","Millenia","MPV","MX-5-Miata","Protege","Protege5","RX-7","RX-8","Tribute"]
+    },
+    {
+	    "brand" : "Mercedes-Benz",
+	    "model" : ["AMG-GT","B-Class-Electric-Drive","C-Class","CL-Class","CLA-Class","CLK-Class","CLS-Class","E-Class","G-Class","GL-Class","GLA-Class","GLC-Class","GLE-Class","GLK-Class","GLS-Class","M-Class","Metris","R-Class","S-Class","SL-Class","SLC-Class","SLK-Class","SLR-McLaren","SLS-Class","Sprinter"]
+    },
+    {
+	    "brand" : "Mini",
+	    "model" : ["Clubman","Convertible","Countryman","Coupe","Hardtop","Paceman","Roadster"]
+    },
+    {
+	    "brand" : "Mitsubishi",
+	    "model" : ["3000GT","Diamante","Eclipse","Endeavor","Galant","Lancer","Montero","Outlander","Raider"]
+    },
+    {
+	    "brand" : "Nissan",
+	    "model" : ["200SX","240SX","300ZX","350Z","370Z","Altima","Altima-Hybrid","Armada","Cube","Frontier","GT-R","Juke","LEAF","Maxima","Murano","Murano-CrossCabriolet","NV-Cargo","NV-Passenger","NV200","Pathfinder","Pathfinder-Hybrid","Quest","Rogue","Sentra","Titan","Titan-XD","Versa","Versa-Note","Xterra"]
+    },
+    {
+	    "brand" : "Porsche",
+	    "model" : ["718-Boxster","718-Cayman","911","918-Spyder","Boxster","Carrera-GT","Cayenne","Cayenne-Hybrid","Cayman","Macan","Panamera"]
+    },
+    {	
+	    "brand" : "Subaru",
+	    "model" : ["Crosstrek","Crosstrek-Hybrid","Forester","Impreza","Legacy","Outback","Tribeca"]
+    },
+    {
+	    "brand" : "Tesla",
+	    "model" : ["Model-S","Model-X","Roadster"]
+    },
+    {
+	    "brand" : "Toyota",
+	    "model" : ["4Runner","86","Avalon","Avalon-Hybrid","C-HR","Camry","Camry-Hybrid","Camry-Solara","Celica","Corolla","Corolla-iM","Echo","FJ-Cruiser","Highlander","Highlander-Hybrid","Land-Cruiser","Matrix","MR2-Spyder","Paseo","Previa","Prius","Prius-c","Prius-Plug-in","Prius-Prime","Prius-v","RAV4","RAV4-EV","RAV4-Hybrid","Sequoia","Sienna","Supra","T100","Tacoma","Tercel","Tundra","Venza","Yaris"]
+    },
+    {
+	    "brand" : "Volkswagen",
+	    "model" : ["Atlas","Beetle","Cabrio","CC","e-Golf","Eos","EuroVan","Golf","Golf-Alltrack","Golf-R","Golf-SportWagen","GTI","Jetta","Passat","Phaeton","R32","Rabbit","Routan","Tiguan","Touareg"]
+    },
+    {
+	    "brand" : "Volvo",
+	    "model" : ["C70","S60","S70","S80","S90","V40","V50","V60","V60-Cross-Country","V70","V90","XC60","XC70","XC90","XC90-Hybrid"]
+    }
+]
