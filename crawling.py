@@ -26,7 +26,13 @@ def crawling(brand, model, zipcode):
 	toVisitPagerLinks.put(seedPage)
 
 	session = requests.Session()
-	headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit 537.36 (KHTML, like Gecko) Chrome", "Accept":"text/html,application/xhtml+xml,application/xml; q=0.9,image/webp,*/*;q=0.8"}
+	headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit 537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36", 
+				"Accept":"text/html,application/xhtml+xml,application/xml; q=0.9,image/webp,*/*;q=0.8",
+				"Accept-Encoding": "gzip, deflate, sdch",
+    			"Accept-Language": "en-US,en;q=0.8",
+    			"Upgrade-Insecure-Requests": "1",
+    			"Cache-Control": "max-age=0",
+    			"Connection": "keep-alive"}
 
 	### on each numbered pager link, scrape all vehicle details link, and get other numbered pager links ###
 	num=1
@@ -58,9 +64,15 @@ def crawling(brand, model, zipcode):
 	print("crawling detail pages...")
 
 	for link in vehicle_detail_links:
-		req = session.get("http://www.carsdirect.com" + link, headers=headers)
 		print("crawling " + "http://www.carsdirect.com" + link)
 		time.sleep(1)
+
+		#to deal with default 30 redirects limits, exception need to be captured
+		try:
+			req = session.get("http://www.carsdirect.com" + link, headers=headers)
+		except requests.exceptions.TooManyRedirects as e:
+			print("requests.exceptions.TooManyRedirects")
+			continue
 
 		bsObj=BeautifulSoup(req.text, "html.parser")
 		
@@ -93,3 +105,11 @@ def crawling(brand, model, zipcode):
 			continue
 
 		Car(zipcode, brand, model, price, miles, year, exterior).save()
+
+		print ("zipcode: " + zipcode \
+				+ " brand: " + brand \
+				+ " model: " + model \
+				+ " price: " + str(price) \
+				+ " miles: " + str(miles) \
+				+ " year: " + str(year) \
+				+ " exterior: " + exterior)
