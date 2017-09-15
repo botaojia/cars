@@ -3,17 +3,19 @@
     <font size="16">Used car resale analysis</font>
   </div>
 <p/>
-  <font size="6">For example, input Brand: "Ford", Model: "Fusion", Zipcode: "07302", and then click "Query" button, to find out interesting statistics of used cars on market. Displayed data are within 50 miles of the query zipcode.</font>
+  <font size="6">For example, input Brand: "Ford", Model: "Fusion", Zipcode: "07302", and then click "Query" button, to find out interesting statistics of used cars on market.</font>
+  <font size="6">For now, zipcode in NY, NJ, and CA are supported. More will be added. Displayed data are within 50 miles of the query zipcode.</font>
+  <font size="6">Click <a href="https://github.com/botaojia/cars">https://github.com/botaojia/cars </a>to view source code.</font>
+  <font size="6">Click <a href="https://github.com/botaojia/cars/blob/master/json/brandModel.json">here</a> to see the full list of supported brand and models.</font>
 <p/>
-  <font size="6">For now, zipcode in NY, NJ, and CA are supported. More will be added. Visiting XXX page for a full list of supported brand, model and zipcode.</font>
-<p/>
-  <font size="6">Displayed data are collected by scrapying http://www.carsdirect.com . </font>
+  <font size="6">Displayed data are collected by scrapying http://www.carsdirect.com weekly.</font>
+
 
   <form action="" method="post">
-	Brand: <input type="text" name="brand"><br/>
-	Model: <input type="text" name="model"><br/>
-	Zipcode: <input type="text" name="zipcode"><br/>
-	<input type="submit" value="Query">
+  Brand: <input type="text" name="brand"><br/>
+  Model: <input type="text" name="model"><br/>
+  Zipcode: <input type="text" name="zipcode"><br/>
+  <input type="submit" value="Query">
   </form>
 
 {% if error %}
