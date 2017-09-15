@@ -49,7 +49,7 @@
     },
     {
 	    "brand" : "Honda",
-	    "model" : ["Acadia","Acadia-Limited","Canyon","Envoy","Jimmy","Safari","Savana","Sierra-1500","Sierra-1500-Hybrid","Sierra-2500HD","Sierra-3500HD","Sonoma","Terrain","Yukon","Yukon-Hybrid","Yukon-XL"]
+	    "model" : ["Accord","Accord Hybrid","Civic","Civic Hybrid","Clarity Fuel Cell","CR-V","CR-Z","Crosstour","CRX","Del Sol","Element","Fit","Fit EV","HR-V","Insight","Odyssey","Passport","Pilot","Prelude","Ridgeline","S2000"]
     },
     {
 	    "brand" : "Hyundai",
