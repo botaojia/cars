@@ -32,11 +32,12 @@ class Data:
         self.model=""
         self.zipcode=""
 
-class Default:
+class Query:
     def __init__(self):
         self.brand='Subaru'
         self.model='Forester'
         self.zipcode='07302'
+        self.display_zipcode='07302'
         
 class BMZ: #brand, model, zipcode
     def __init__(self):
@@ -65,23 +66,23 @@ class BMZ: #brand, model, zipcode
                 self.bm_dict[item["brand"].lower()].append(m.lower())
     	
 data = Data()
-default = Default()
+query = Query()
 bmz = BMZ()
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    global default
+    global query
     global bmz
     error = None
     if request.method == 'GET':
-        error = calculate_stats(default.brand, default.model, default.zipcode)
+        error = calculate_stats(query)
     elif request.method == 'POST':
         input_brand = request.form['brand'].strip()
         input_model = request.form['model'].strip()
         input_zipcode = request.form['zipcode'].strip()
         new_brand = re.sub(' +', '-', input_brand).lower()
         new_model = re.sub(' +', '-', input_model).lower()
-        new_zipcode = re.sub(' +', '-', input_zipcode).lower()
+        new_zipcode = re.sub(' +', '', input_zipcode)
 
         if new_brand not in bmz.bm_dict:
             error = "Brand " + new_brand.title() + " is not supported. Previous results are still shown below."
@@ -89,34 +90,31 @@ def index():
         elif new_model not in bmz.bm_dict[new_brand]:
             error = "Model " + new_model.title() + " is not supported in brand " + new_brand.title() + " Previous results are still shown below."
             return render_template('index.html', error = error)
-        elif  new_zipcode not in bmz.zipcodeNJ and \
-              new_zipcode not in bmz.zipcodeNY and \
-              new_zipcode not in bmz.zipcodeCA:
+        elif  new_zipcode not in bmz.zipcode_map:
             error = "zipcode " + new_zipcode + " is not supported. Previous results are still shown below."
             return render_template('index.html', error = error)
         else:
-            default.brand=new_brand
-            default.model=new_model
-            default.zipcode=bmz.zipcode_map[new_zipcode]
+            query.brand = new_brand
+            query.model = new_model
+            query.zipcode = bmz.zipcode_map[new_zipcode]
+            query.display_zipcode = new_zipcode
         
-        print (default.zipcode)
-        
-        error = calculate_stats(default.brand, default.model, default.zipcode)
+        error = calculate_stats(query)
         
     return render_template('index.html', error = error)
 
-def calculate_stats(brand, model, zipcode):
+def calculate_stats(query):
     global data
 
-    record = Car.objects(brand=brand.lower(), model=model.lower(), zipcode=zipcode)
+    record = Car.objects(brand=query.brand.lower(), model=query.model.lower(), zipcode=query.zipcode)
     if len(record) <=3:
-        return "Not enought data for " + brand.title() + " " + model.title() + " at " + zipcode + \
+        return "Not enought data for " + query.brand.title() + " " + query.model.title() + " at " + query.display_zipcode + \
                 ". Please query other combinations. Prevous results is still shown below."
   
     data.clear()
-    data.brand=brand
-    data.model=model
-    data.zipcode=zipcode
+    data.brand=query.brand
+    data.model=query.model
+    data.zipcode=query.zipcode
 
     for x in record:
         data.price_vs_mile.append((x.miles, x.price))
@@ -133,7 +131,7 @@ def graph():
     global data
     (ar, br) = polyfit(data.miles, data.price, 1)
     xy_chart = pygal.XY(stroke=False, width=800, height=700, explicit_size=True, legend_at_bottom=True)
-    xy_chart.title = "Price($USD) vs Miles. Price decay coefficent: " + str(round(ar, 3))
+    xy_chart.title = "Price($USD) vs Miles. Price depreciation coefficent: " + str(round(ar, 3))
     xy_chart.add("Used " + data.model.title() + " price vs. miles", data.price_vs_mile)
     xy_chart.add("Linear regression with slope of " + str(round(ar, 3)), \
                 [(min(data.miles), min(data.miles)*ar + br), (max(data.miles), max(data.miles)*ar + br)], \
@@ -146,7 +144,7 @@ def graph2():
     global data
     (ar, br) = polyfit(data.year, data.price, 1)
     xy_chart = pygal.XY(stroke=False, width=800, height=700, explicit_size=True, legend_at_bottom=True)
-    xy_chart.title = "Price($USD) vs years. Price rise coefficent: " + str(round(ar, 3))
+    xy_chart.title = "Price($USD) vs years. Price appreciaiton coefficent: " + str(round(ar, 3))
     xy_chart.add("Used " + data.model.title() + " price vs. years", data.price_vs_year)
     xy_chart.add("Linear regression with slope of " + str(round(ar, 3)), \
                  [(min(data.year), min(data.year)*ar + br), (max(data.year), max(data.year)*ar + br)], \
