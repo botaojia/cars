@@ -49,7 +49,7 @@
     },
     {
 	    "brand" : "Honda",
-	    "model" : ["Accord","Accord Hybrid","Civic","Civic Hybrid","Clarity Fuel Cell","CR-V","CR-Z","Crosstour","CRX","Del Sol","Element","Fit","Fit EV","HR-V","Insight","Odyssey","Passport","Pilot","Prelude","Ridgeline","S2000"]
+	    "model" : ["Accord",,"Civic","CR-V","CR-Z","Crosstour","CRX","Element","Fit","HR-V","Insight","Odyssey","Passport","Pilot","Prelude","Ridgeline","S2000"]
     },
     {
 	    "brand" : "Hyundai",
