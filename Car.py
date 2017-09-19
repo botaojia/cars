@@ -9,3 +9,10 @@ class Car(Document):
     year = IntField()
     exterior = StringField()
     meta = { 'indexes': [('zipcode', 'brand', 'model')] }
+    
+class carStat(Document):
+    zipcode = StringField(length=5)
+    brand = StringField(max_length=15)
+    model = StringField()
+    number = IntField()
+    meta = { 'indexes': [('zipcode')] }

@@ -8,6 +8,7 @@ import pygal
 from pygal.style import Style
 from scipy import polyfit
 from Car import Car
+from Car import carStat
 
 app = Flask(__name__)
 if os.getenv('MONGOLAB_URI') is not None: # on Heroku
@@ -44,13 +45,13 @@ class BMZ: #brand, model, zipcode
         self.bm_dict = {}
         self.zipcode_map = {}
         with open("json/brandModel.json") as data_file:
-        	self.bm = json.load(data_file)
+            self.bm = json.load(data_file)
         with open("json/zipcodeNY.json") as data_file:
-        	self.zipcodeNY = json.load(data_file)
+            self.zipcodeNY = json.load(data_file)
         with open("json/zipcodeNJ.json") as data_file:
-        	self.zipcodeNJ = json.load(data_file)
+            self.zipcodeNJ = json.load(data_file)
         with open("json/zipcodeCA.json") as data_file:
-        	self.zipcodeCA = json.load(data_file)
+            self.zipcodeCA = json.load(data_file)
         
         for key, val in self.zipcodeNY.items():
             self.zipcode_map[key] = val
@@ -64,7 +65,7 @@ class BMZ: #brand, model, zipcode
             self.bm_dict[item["brand"].lower()] = []
             for m in models:
                 self.bm_dict[item["brand"].lower()].append(m.lower())
-    	
+        
 data = Data()
 query = Query()
 bmz = BMZ()
@@ -130,10 +131,10 @@ def calculate_stats(query):
 def graph():
     global data
     (ar, br) = polyfit(data.miles, data.price, 1)
-    xy_chart = pygal.XY(stroke=False, width=800, height=700, explicit_size=True, legend_at_bottom=True)
+    xy_chart = pygal.XY(stroke=False, width=750, height=600, explicit_size=True, legend_at_bottom=True)
     xy_chart.title = "Price($USD) vs Miles. Price depreciation coefficent: " + str(round(ar, 3))
     xy_chart.add("Used " + data.model.title() + " price vs. miles", data.price_vs_mile)
-    xy_chart.add("Linear regression with slope of " + str(round(ar, 3)), \
+    xy_chart.add("Linear regression at slope of " + str(round(ar, 3)), \
                 [(min(data.miles), min(data.miles)*ar + br), (max(data.miles), max(data.miles)*ar + br)], \
                 stroke=True, stroke_style={'width': 5, })
     xy_chart.render()
@@ -143,10 +144,10 @@ def graph():
 def graph2():
     global data
     (ar, br) = polyfit(data.year, data.price, 1)
-    xy_chart = pygal.XY(stroke=False, width=800, height=700, explicit_size=True, legend_at_bottom=True)
+    xy_chart = pygal.XY(stroke=False, width=750, height=600, explicit_size=True, legend_at_bottom=True)
     xy_chart.title = "Price($USD) vs years. Price appreciaiton coefficent: " + str(round(ar, 3))
     xy_chart.add("Used " + data.model.title() + " price vs. years", data.price_vs_year)
-    xy_chart.add("Linear regression with slope of " + str(round(ar, 3)), \
+    xy_chart.add("Linear regression at slope of " + str(round(ar, 3)), \
                  [(min(data.year), min(data.year)*ar + br), (max(data.year), max(data.year)*ar + br)], \
                  stroke=True, stroke_style={'width': 5, })
     xy_chart.render()
@@ -156,7 +157,7 @@ def graph2():
 def graph3():
     global data
     hist, bins = numpy.histogram(data.year, bins=(max(data.year)-min(data.year)+1))
-    bar_chart = pygal.Bar(width=800, height=700, explicit_size=True, legend_at_bottom=True)
+    bar_chart = pygal.Bar(width=750, height=600, explicit_size=True, legend_at_bottom=True)
     bar_chart.x_labels = map(str, range(min(data.year), max(data.year)+1))
     bar_chart.title = "Used " + data.model.title() + " release year popularity (in number of on market used cars)"
     bar_chart.add('Number of used cars on market for the made of year', hist)
@@ -179,7 +180,7 @@ def graph4():
         color_percent[idx] = round(color_percent[idx]/total, 2)*100
 
     custom_style = Style(colors = colors)
-    pie_chart = pygal.Pie(width=800, height=700, explicit_size=True, \
+    pie_chart = pygal.Pie(width=750, height=600, explicit_size=True, \
                           print_values=True, legend_at_bottom=False, \
                           style=custom_style)
 
@@ -193,6 +194,26 @@ def graph4():
     pie_chart.title = "Used " + data.model.title() + " exterior color popularity(in %)"
     pie_chart.render()
     return Response(response=pie_chart.render(), content_type='image/svg+xml')
+
+@app.route('/top_10_brand/')
+def graph5():
+    global query
+    record = carStat.objects(zipcode = query.zipcode)
+    np = []
+    for val in record:
+        np.append([val.brand, val.model, int(val.number)])
+        print([val.brand, val.model, int(val.number)])
+    
+    top10=sorted(np, key=lambda x: x[2])
+    line_chart = pygal.HorizontalBar(width=750, height=600, explicit_size=True, \
+                                     print_values=True, legend_at_bottom=False, legend_box_size=38)
+    line_chart.title = "Most popular car at zipcode " + query.display_zipcode
+    
+    for i in range(-1, -10, -1):
+        line_chart.add(top10[i][0].title() + " " + top10[i][1].title(), top10[i][2])
+        line_chart.render()
+        
+    return Response(response=line_chart.render(), content_type='image/svg+xml')
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 8080))
