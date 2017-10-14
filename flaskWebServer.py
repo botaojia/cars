@@ -3,6 +3,7 @@ import json
 import re
 import os
 from mongoengine import connect
+import redis
 from flask import Flask, Response, render_template, request, redirect
 import pygal
 from pygal.style import Style
@@ -17,6 +18,14 @@ if os.getenv('MONGOLAB_URI') is not None: # on Heroku
     connect(db, host=mongolab_uri)
 else:
     connect('usedCars')
+
+redis_url = os.getenv('REDIS_URL', 'redis://localhost:6379')
+cache = redis.from_url(redis_url)
+
+def getCache(hash_key, key):
+    tmp=cache.hmget(hash_key, key)
+    val=str(tmp[0])[3:-2].split(',')
+    return val
     
 class Data:
     def __init__(self):
@@ -45,13 +54,13 @@ class BMZ: #brand, model, zipcode
         self.bm_dict = {}
         self.zipcode_map = {}
         with open("json/brandModel.json") as data_file:
-            self.bm = json.load(data_file)
+        	self.bm = json.load(data_file)
         with open("json/zipcodeNY.json") as data_file:
-            self.zipcodeNY = json.load(data_file)
+        	self.zipcodeNY = json.load(data_file)
         with open("json/zipcodeNJ.json") as data_file:
-            self.zipcodeNJ = json.load(data_file)
+        	self.zipcodeNJ = json.load(data_file)
         with open("json/zipcodeCA.json") as data_file:
-            self.zipcodeCA = json.load(data_file)
+        	self.zipcodeCA = json.load(data_file)
         
         for key, val in self.zipcodeNY.items():
             self.zipcode_map[key] = val
@@ -65,7 +74,7 @@ class BMZ: #brand, model, zipcode
             self.bm_dict[item["brand"].lower()] = []
             for m in models:
                 self.bm_dict[item["brand"].lower()].append(m.lower())
-        
+    	
 data = Data()
 query = Query()
 bmz = BMZ()
@@ -106,25 +115,55 @@ def index():
 
 def calculate_stats(query):
     global data
-
-    record = Car.objects(brand=query.brand.lower(), model=query.model.lower(), zipcode=query.zipcode)
-    if len(record) <=3:
-        return "Not enought data for " + query.brand.title() + " " + query.model.title() + " at " + query.display_zipcode + \
-                ". Please query other combinations. Prevous results is still shown below."
-  
-    data.clear()
-    data.brand=query.brand
-    data.model=query.model
-    data.zipcode=query.zipcode
-
-    for x in record:
-        data.price_vs_mile.append((x.miles, x.price))
-        data.price_vs_year.append((x.year, x.price))
-        data.price.append(x.price)
-        data.miles.append(x.miles)
-        data.year.append(x.year)
-        data.exterior.append(x.exterior)
     
+    hash_key = query.brand.lower() + "_" + query.model.lower() + "_" + query.zipcode
+    if(cache.exists(hash_key)):
+        print(hash_key + " exisits. Loading from Redis cache")
+        data.clear()
+        data.brand=query.brand
+        data.model=query.model
+        data.zipcode=query.zipcode
+        price=list(map(int, getCache(hash_key,"price")))
+        miles=list(map(int, getCache(hash_key,"miles")))
+        year=list(map(int, getCache(hash_key,"year")))
+        exterior=getCache(hash_key,"exterior")
+
+        data.price=price
+        data.miles=miles
+        data.year=year
+        data.exterior=exterior
+        
+        for x, y in zip(miles, price):
+            data.price_vs_mile.append((x, y))
+        for x, y in zip(year, price):
+            data.price_vs_year.append((x, y))
+        
+    else:
+        record = Car.objects(brand=query.brand.lower(), model=query.model.lower(), zipcode=query.zipcode)
+        if len(record) <=3:
+            return "Not enought data for " + query.brand.title() + " " + query.model.title() + " at " + query.display_zipcode + \
+                    ". Please query other combinations. Prevous results is still shown below."
+      
+        data.clear()
+        data.brand=query.brand
+        data.model=query.model
+        data.zipcode=query.zipcode
+    
+        for x in record:
+            data.price_vs_mile.append((x.miles, x.price))
+            data.price_vs_year.append((x.year, x.price))
+            data.price.append(x.price)
+            data.miles.append(x.miles)
+            data.year.append(x.year)
+            data.exterior.append(x.exterior)
+        
+        cache.hmset(hash_key, {
+            "price": data.price,
+            "miles": data.miles,
+            "year":  data.year,
+            "exterior": data.exterior,
+        })
+
     return None
 
 @app.route('/price_vs_miles_svg/')
@@ -202,7 +241,7 @@ def graph5():
     np = []
     for val in record:
         np.append([val.brand, val.model, int(val.number)])
-        print([val.brand, val.model, int(val.number)])
+        #print([val.brand, val.model, int(val.number)])
     
     top10=sorted(np, key=lambda x: x[2])
     line_chart = pygal.HorizontalBar(width=750, height=600, explicit_size=True, \
