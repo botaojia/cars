@@ -8,4 +8,4 @@ The design is straight forward. I implemented and deployed a web crawler on clou
 
 Fortunately, cloud9 had a temporary promotion which enables me to use 3 free workspaces to crawling in parallel for New York, New Jersey and California data. 
 
-Unfortunately, Heroku free dyno does not support Redis persistence. The cache will be cleaned during their maintenance window. Regardless, I will configured Redis volatile-lru Maxmemory policy in case the free dyno run out of memory.
+Unfortunately, Heroku free dyno does not support Redis persistence. The cache will be cleaned during their maintenance window. Regardless, I configured Redis volatile-lru Maxmemory policy in case the free dyno run out of memory.
