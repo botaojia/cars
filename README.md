@@ -1,7 +1,8 @@
-Unfortunately, due to mLab MongoDB add-on discontinued, this project is currently pending additional depolyment configuration update on both mlab, and heroku dynos to restore 100% functionality.
+The full production depolyment used to work perfectly, until recent mLab MongoDB add-on discontinuation. The depolyment is currently pending additional configuration updates on both mlab, and heroku dynos to restore 100% functionality. As a result, I discontinued my ownership of domain www.usedcarnearby.com which was used as the full production front-end.
+
+
 ![image](https://github.com/botaojia/cars/blob/master/mlab_heroku_discontinued.jpg)
 
-As a result, I discontinued my ownership of domain www.usedcarnearby.com which was used as the full production front-end.
 
 All the code and algorithm are still valid, if running using a locally configured mongodb connection, python3 environment.
 Illustration below is still 100% valid.
