@@ -1,5 +1,5 @@
 Unfortunately, due to mLab MongoDB add-on discontinued, this project is currently pending additional depolyment configuration update on both mlab, and heroku dynos to restore 100% functionality.
-![image](https://github.com/botaojia/cars/blob/master/mlab_heroku_discontinued.png)
+![image](https://github.com/botaojia/cars/blob/master/mlab_heroku_discontinued.jpg)
 
 As a result, I discontinued my ownership of domain www.usedcarnearby.com which was used as the full production front-end.
 
